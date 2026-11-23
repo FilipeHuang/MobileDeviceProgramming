@@ -1,0 +1,17 @@
+services:
+  users:
+    build: ./users
+    ports: ["8001:8000"]
+    env_file: .env
+    environment:
+      DATABASE_URL: sqlite:////data/users.db
+    volumes: ["./data/users:/data"]
+
+  content:
+    build: ./content
+    ports: ["8002:8000"]
+    env_file: .env
+    environment:
+      DATABASE_URL: sqlite:////data/content.db
+      UPLOAD_DIR: /data/uploads
+    volumes: ["./data/content:/data"]
